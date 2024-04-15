@@ -1,0 +1,96 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrello</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <h1>Carrello</h1>
+    <?php
+    include 'connection.php';
+    $idUser = $_SESSION['id'];
+    $sql = "SELECT ID FROM carrello WHERE idUtente = $idUser";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        ?>
+        <div class="container">
+            <div class="row">
+                <?php
+                $row = $result->fetch_assoc();
+                $idCarrello = $row['ID'];
+                $sql = "SELECT * FROM aggiunta WHERE idCarrello = $idCarrello";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $idProdotto = $row['idProdotto'];
+                        $quantita = $row['Quantita'];
+                        $sql = "SELECT * FROM prodotto WHERE ID = $idProdotto";
+                        $resultProdotto = $conn->query($sql);
+                        if ($resultProdotto->num_rows > 0) {
+                            $rowProdotto = $resultProdotto->fetch_assoc();
+                            ?>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo $rowProdotto['Nome']; ?></h5>
+                                        <?php
+                                        $query = "SELECT Path FROM foto WHERE idProdotto = " . $row['ID'];
+                                        $result2 = $conn->query($query);
+                                        $foto = $result2->fetch_assoc();
+                                        echo '<img src="img/' . $foto['Path'] . '" class="card-img-top" alt="...">';
+                                        ?>
+                                        <p class="card-text">Quantità: <?php echo $quantita; ?></p>
+                                        <p class="card-text">Prezzo: <?php echo $rowProdotto['Prezzo']; ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                } else {
+                    echo 'Carrello vuoto';
+                }
+                ?>
+            </div>
+            <br>
+            <div class="col-md-4 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Totale</h5>
+                        <?php
+                        $sql = "SELECT SUM(prodotto.Prezzo * aggiunta.Quantita) AS Totale FROM prodotto INNER JOIN aggiunta ON prodotto.ID = aggiunta.idProdotto WHERE idCarrello = $idCarrello";
+                        $resultTotale = $conn->query($sql);
+                        if ($resultTotale->num_rows > 0) {
+                            $rowTotale = $resultTotale->fetch_assoc();
+                            echo '<p class="card-text">Totale: ' . $rowTotale['Totale'] . '</p>';
+                        }
+                        ?>
+                        <a href="acquista.php" class="btn btn-primary">Acquista</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+    } else {
+        echo 'Carrello non trovato';
+    }
+    ?>
+    <!-- Include Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div class="text-center">
+        <a href="index.php" class="btn btn-primary">Torna alla Home</a>
+    </div>
+
+</body>
+
+</html>

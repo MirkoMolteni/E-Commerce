@@ -1,0 +1,36 @@
+Tabella user
+CREATE TABLE `my_mirkom`.`dbECommerce_user` (`ID` INT NOT NULL AUTO_INCREMENT , `Username` VARCHAR(32) NOT NULL , `Password` VARCHAR(32) NOT NULL , `EMail` VARCHAR(32) NOT NULL , `Telefono` VARCHAR(32) NOT NULL , `Admin` BOOLEAN NOT NULL DEFAULT FALSE , PRIMARY KEY (`ID`)) ENGINE = InnoDB;
+
+CREATE TABLE `my_mirkom`.`dbECommerce_feedback` (`ID` INT NOT NULL AUTO_INCREMENT , `Voto` INT(2) NOT NULL , `Commernto` VARCHAR(32) NOT NULL , `Data` DATE NOT NULL , `idUtente` INT NOT NULL , `idOrdine` INT NOT NULL , `idProdotto` INT NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB;
+
+CREATE TABLE `my_mirkom`.`dbECommerce_prodotto` (`ID` INT NOT NULL AUTO_INCREMENT , `Nome` VARCHAR(32) NOT NULL , `Descrizione` VARCHAR(32) NOT NULL , `Quantita` INT NOT NULL , `Prezzo` INT NOT NULL , `DataAggiunta` DATE NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB;
+
+CREATE TABLE `my_mirkom`.`dbECommerce_foto` (`ID` INT NOT NULL AUTO_INCREMENT , `Descrizione` VARCHAR(32) NOT NULL , `Nome` VARCHAR(32) NOT NULL , `Path` VARCHAR(32) NOT NULL , `idProdotto` INT NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB;
+
+CREATE TABLE `my_mirkom`.`dbECommerce_categoria` (`ID` INT NOT NULL AUTO_INCREMENT , `Nome` VARCHAR(32) NOT NULL , `Descrizione` VARCHAR(32) NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB;
+
+CREATE TABLE `my_mirkom`.`dbECommerce_categorizzazione` (`ID` INT NOT NULL AUTO_INCREMENT , `idCategoria` INT NOT NULL , `idProdotto` INT NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB;
+
+CREATE TABLE `my_mirkom`.`dbECommerce_carrello` (`ID` INT NOT NULL AUTO_INCREMENT , `idUtente` INT NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB;
+
+CREATE TABLE `my_mirkom`.`dbECommerce_aggiunta` (`ID` INT NOT NULL AUTO_INCREMENT , `idCarrello` INT NOT NULL , `idProdotto` INT NOT NULL , `Quantita` INT(2) NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB;
+
+CREATE TABLE `my_mirkom`.`dbECommerce_pagamento` (`ID` INT NOT NULL AUTO_INCREMENT , `NumeroCarta` VARCHAR(32) NOT NULL , `Scadenza` DATE NOT NULL , `CVV` INT(3) NOT NULL , `idUtente` INT NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB;
+
+CREATE TABLE `my_mirkom`.`dbECommerce_ordine` (`ID` INT NOT NULL AUTO_INCREMENT , `Stato` VARCHAR(32) NOT NULL , `Indirizzo` VARCHAR(32) NOT NULL , `DataAggiunta` DATE NOT NULL , `idCarrello` INT NOT NULL , `idPagamento` INT NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB;
+
+Query modifiche
+
+ALTER TABLE `dbECommerce_aggiunta` ADD CONSTRAINT `FK1_aggiuta` FOREIGN KEY (`idCarrello`) REFERENCES `dbECommerce_carrello`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `dbECommerce_aggiunta` ADD CONSTRAINT `FK2_aggiunta` FOREIGN KEY (`idProdotto`) REFERENCES `dbECommerce_prodotto`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `dbECommerce_carrello` ADD CONSTRAINT `FK1_carrello` FOREIGN KEY (`idUtente`) REFERENCES `dbECommerce_user`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `dbECommerce_categorizzazione` ADD CONSTRAINT `FK1_categ` FOREIGN KEY (`idCategoria`) REFERENCES `dbECommerce_categoria`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `dbECommerce_categorizzazione` ADD CONSTRAINT `FK2_categ` FOREIGN KEY (`idProdotto`) REFERENCES `dbECommerce_prodotto`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `dbECommerce_feedback` ADD CONSTRAINT `FK1_feedback` FOREIGN KEY (`idOrdine`) REFERENCES `dbECommerce_ordine`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `dbECommerce_feedback` ADD CONSTRAINT `FK2_feedback` FOREIGN KEY (`idProdotto`) REFERENCES `dbECommerce_prodotto`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `dbECommerce_feedback` ADD CONSTRAINT `Fk3_feedback` FOREIGN KEY (`idUtente`) REFERENCES `dbECommerce_user`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `dbECommerce_foto` ADD CONSTRAINT `FK1_foto` FOREIGN KEY (`idProdotto`) REFERENCES `dbECommerce_prodotto`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `dbECommerce_ordine` ADD CONSTRAINT `FK1_ordine` FOREIGN KEY (`idCarrello`) REFERENCES `dbECommerce_carrello`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `dbECommerce_ordine` ADD CONSTRAINT `FK2_ordine` FOREIGN KEY (`idPagamento`) REFERENCES `dbECommerce_pagamento`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `dbECommerce_pagamento` ADD CONSTRAINT `FK1_pagamento` FOREIGN KEY (`idUtente`) REFERENCES `dbECommerce_user`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
