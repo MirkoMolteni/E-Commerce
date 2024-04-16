@@ -30,7 +30,7 @@ if ($result->num_rows > 0) {
             $quantitaDisponibile -= $quantita;
             $sql = "UPDATE prodotto SET quantita = $quantitaDisponibile WHERE ID = $idProdotto";
             $conn->query($sql);
-            header('Location: carello.php');
+            header('Location: carrello.php');
         } else {
             echo 'Quantità non disponibile';
         }

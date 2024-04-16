@@ -22,12 +22,15 @@ mysqli_close($conn);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+    <?php
+    include_once 'navBar.php';
+    $navBar = new navBar();
+    $navBar->getRender();
+    ?>
     <div class="container">
-        <h1>Profilo</h1>
         <p>Userame: <?php echo $user['Username']; ?></p>
         <p>Email: <?php echo $user['EMail']; ?></p>
         <p>Telefono: <?php echo $user['Telefono']; ?></p>
-        <a href="index.php" class="btn btn-primary">Home</a>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

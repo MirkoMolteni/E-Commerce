@@ -12,7 +12,7 @@ session_start();
 </head>
 
 <body>
-    <div class="container">
+    <!-- <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="">E-Commerce</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -22,31 +22,34 @@ session_start();
             <div class="collapse navbar-collapse ml-auto" id="navbarNav">
                 <ul class="navbar-nav">
                     <?php
-                    if(isset($_SESSION['username'])) {
-                        echo '<li class="nav-item">
-                                <a class="nav-link" href="profile.php">'.$_SESSION['username'].'</a>
-                              </li>';
-                        echo '<li class="nav-item">
-                                <a class="nav-link" href="logout.php">Logout</a>
-                              </li>';
-                    } else {
-                        echo '<li class="nav-item">
-                                <a class="nav-link" href="login.php">Login</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link" href="register.php">Register</a>
-                              </li>';
-                    }
+                    // if(isset($_SESSION['username'])) {
+                    //     echo '<li class="nav-item">
+                    //             <a class="nav-link" href="profile.php">'.$_SESSION['username'].'</a>
+                    //           </li>';
+                    //     echo '<li class="nav-item">
+                    //             <a class="nav-link" href="logout.php">Logout</a>
+                    //           </li>';
+                    // } else {
+                    //     echo '<li class="nav-item">
+                    //             <a class="nav-link" href="login.php">Login</a>
+                    //           </li>
+                    //           <li class="nav-item">
+                    //             <a class="nav-link" href="register.php">Register</a>
+                    //           </li>';
+                    // }
                     ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="carello.php">Carello</a>
+                        <a class="nav-link" href="carrello.php">Carello</a>
                     </li>
                 </ul>
             </div>
         </nav>
-    </div>
+    </div> -->
 
     <?php
+    include_once 'navBar.php';
+    $navBar = new navBar();
+    $navBar->getRender();
     include_once 'galleria.php';
     $prodotti = Galleria::getProdotti();
     echo Galleria::render($prodotti);

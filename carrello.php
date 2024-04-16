@@ -13,8 +13,10 @@ session_start();
 </head>
 
 <body>
-    <h1>Carrello</h1>
     <?php
+    include_once 'navBar.php';
+    $navBar = new navBar();
+    $navBar->getRender();
     include 'connection.php';
     $idUser = $_SESSION['id'];
     $sql = "SELECT ID FROM carrello WHERE idUtente = $idUser";
@@ -61,7 +63,7 @@ session_start();
                 ?>
             </div>
             <br>
-            <div class="col-md-4 mx-auto">
+            <div class="col-md-4 mx-auto ">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Totale</h5>
@@ -87,9 +89,6 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <div class="text-center">
-        <a href="index.php" class="btn btn-primary">Torna alla Home</a>
-    </div>
 
 </body>
 
