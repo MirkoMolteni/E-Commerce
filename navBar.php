@@ -30,7 +30,7 @@ class navBar
         }
         echo '
                         <li class="nav-item">
-                        <a class="nav-link" href="carrello.php">Carello</a>
+                        <a class="nav-link" href="carrello.php">Carrello</a>
                         </li>
                     </ul>
                 </div>
