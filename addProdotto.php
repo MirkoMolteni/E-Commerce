@@ -19,7 +19,7 @@ if ($result->num_rows > 0) {
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
-                $quantitaCarrello = $row['quantita'];
+                $quantitaCarrello = $row['Quantita'];
                 $quantitaCarrello += $quantita;
                 $sql = "UPDATE aggiunta SET Quantita = $quantitaCarrello WHERE idProdotto = $idProdotto AND idCarrello = $idCarrello";
                 $conn->query($sql);

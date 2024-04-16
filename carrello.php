@@ -44,13 +44,14 @@ session_start();
                                     <div class="card-body">
                                         <h5 class="card-title"><?php echo $rowProdotto['Nome']; ?></h5>
                                         <?php
-                                        $query = "SELECT Path FROM foto WHERE idProdotto = " . $row['ID'];
+                                        $query = "SELECT Path FROM foto WHERE idProdotto = " . $rowProdotto['ID'];
                                         $result2 = $conn->query($query);
                                         $foto = $result2->fetch_assoc();
                                         echo '<img src="img/' . $foto['Path'] . '" class="card-img-top" alt="...">';
                                         ?>
                                         <p class="card-text">Quantità: <?php echo $quantita; ?></p>
                                         <p class="card-text">Prezzo: <?php echo $rowProdotto['Prezzo']; ?></p>
+                                        <a href="removeProdotto.php?idProdotto=<?php echo $idProdotto; ?>" class="btn btn-primary">Rimuovi</a>
                                     </div>
                                 </div>
                             </div>
