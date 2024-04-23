@@ -1,9 +1,10 @@
 <?php
 session_start();
+include 'config.php';
 include 'connection.php';
 $username = $_POST['username'];
 $password = md5($_POST['password']);
-$stmt = $conn->prepare("SELECT * FROM user WHERE username = ? AND password = ?");
+$stmt = $conn->prepare("SELECT * FROM ".$prefix."user WHERE username = ? AND password = ?");
 $stmt->bind_param("ss", $username, $password);
 $stmt->execute();
 $result = $stmt->get_result();

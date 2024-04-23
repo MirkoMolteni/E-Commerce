@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +20,7 @@ session_start();
     $navBar->getRender();
     include 'connection.php';
     $idUser = $_SESSION['id'];
-    $sql = "SELECT ID FROM carrello WHERE idUtente = $idUser";
+    $sql = "SELECT ID FROM ".$prefix."carrello WHERE idUtente = $idUser";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         ?>
@@ -28,13 +29,13 @@ session_start();
                 <?php
                 $row = $result->fetch_assoc();
                 $idCarrello = $row['ID'];
-                $sql = "SELECT * FROM aggiunta WHERE idCarrello = $idCarrello";
+                $sql = "SELECT * FROM ".$prefix."aggiunta WHERE idCarrello = $idCarrello";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $idProdotto = $row['idProdotto'];
                         $quantita = $row['Quantita'];
-                        $sql = "SELECT * FROM prodotto WHERE ID = $idProdotto";
+                        $sql = "SELECT * FROM ".$prefix."prodotto WHERE ID = $idProdotto";
                         $resultProdotto = $conn->query($sql);
                         if ($resultProdotto->num_rows > 0) {
                             $rowProdotto = $resultProdotto->fetch_assoc();
@@ -44,7 +45,7 @@ session_start();
                                     <div class="card-body">
                                         <h5 class="card-title"><?php echo $rowProdotto['Nome']; ?></h5>
                                         <?php
-                                        $query = "SELECT Path FROM foto WHERE idProdotto = " . $rowProdotto['ID'];
+                                        $query = "SELECT Path FROM ".$prefix."foto WHERE idProdotto = " . $rowProdotto['ID'];
                                         $result2 = $conn->query($query);
                                         $foto = $result2->fetch_assoc();
                                         echo '<img src="img/' . $foto['Path'] . '" class="card-img-top" alt="...">';
@@ -69,7 +70,7 @@ session_start();
                     <div class="card-body">
                         <h5 class="card-title">Totale</h5>
                         <?php
-                        $sql = "SELECT SUM(prodotto.Prezzo * aggiunta.Quantita) AS Totale FROM prodotto INNER JOIN aggiunta ON prodotto.ID = aggiunta.idProdotto WHERE idCarrello = $idCarrello";
+                        $sql = "SELECT SUM(prodotto.Prezzo * aggiunta.Quantita) AS Totale FROM ".$prefix."prodotto INNER JOIN aggiunta ON prodotto.ID = aggiunta.idProdotto WHERE idCarrello = $idCarrello";
                         $resultTotale = $conn->query($sql);
                         if ($resultTotale->num_rows > 0) {
                             $rowTotale = $resultTotale->fetch_assoc();
