@@ -20,6 +20,12 @@ class navBar
             echo '<li class="nav-item">
                             <a class="nav-link" href="logout.php">Logout</a>
                           </li>';
+
+            if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+                echo '<li class="nav-item">
+                            <a class="nav-link" href="admin.php">Pannello di controllo</a>
+                          </li>';
+            }
         } else {
             echo '<li class="nav-item">
                             <a class="nav-link" href="login.php">Login</a>
