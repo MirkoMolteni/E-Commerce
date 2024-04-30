@@ -54,10 +54,29 @@ if(isset($_GET['nomeProdotto']) && isset($_GET['descrizioneProdotto']) && isset(
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form action="creaProdotto.php" method="GET">
+                <form action="creaProdotto.php" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="nomeProdotto">Nome del prodotto:</label>
                         <input type="text" name="nomeProdotto" id="nomeProdotto" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descrizioneProdotto">Descrizione del prodotto:</label>
+                        <input type="text" name="descrizioneProdotto" id="descrizioneProdotto" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prezzoProdotto">Prezzo del prodotto:</label>
+                        <input type="number" name="prezzoProdotto" id="prezzoProdotto" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantitaProdotto">Quantità del prodotto:</label>
+                        <input type="number" name="quantitaProdotto" id="quantitaProdotto" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="immagineProdotto">Immagine del prodotto:</label>
+                        <input type="file" name="immagineProdotto" id="immagineProdotto" class="form-control" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crea prodotto</button>
+                </form>
                     </div>
                     <div class="form-group">
                         <label for="descrizioneProdotto">Descrizione del prodotto:</label>
