@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 14, 2024 alle 17:01
+-- Creato il: Apr 30, 2024 alle 09:30
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -33,14 +33,6 @@ CREATE TABLE `aggiunta` (
   `idProdotto` int(11) NOT NULL,
   `Quantita` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dump dei dati per la tabella `aggiunta`
---
-
-INSERT INTO `aggiunta` (`ID`, `idCarrello`, `idProdotto`, `Quantita`) VALUES
-(1, 1, 1, 2),
-(2, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -123,7 +115,8 @@ INSERT INTO `foto` (`ID`, `Descrizione`, `Nome`, `Path`, `idProdotto`) VALUES
 (2, 'Cuffie on-ear', 'Cuffie', 'cuffie.jpeg', 2),
 (3, 'Monitor per computer', 'Monitor', 'monitor.jpeg', 3),
 (4, 'Mouse da gaming', 'Mouse', 'mouse.png', 4),
-(5, 'Tastiera da gaming', 'Tastiera', 'tastiera.jpg', 5);
+(5, 'Tastiera da gaming', 'Tastiera', 'tastiera.jpg', 5),
+(7, 'Tappetino per mouse', 'Tappetino', 'tappetino.png', 7);
 
 -- --------------------------------------------------------
 
@@ -166,7 +159,7 @@ CREATE TABLE `prodotto` (
   `Descrizione` varchar(32) NOT NULL,
   `Quantita` int(11) NOT NULL,
   `Prezzo` int(11) NOT NULL,
-  `DataAggiunta` date NOT NULL
+  `DataAggiunta` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -174,11 +167,12 @@ CREATE TABLE `prodotto` (
 --
 
 INSERT INTO `prodotto` (`ID`, `Nome`, `Descrizione`, `Quantita`, `Prezzo`, `DataAggiunta`) VALUES
-(1, 'Casse', 'Casse per computer', 48, 70, '2024-04-09'),
-(2, 'Cuffie', 'Cuffie on-ear', 49, 100, '2024-04-09'),
+(1, 'Casse', 'Casse per computer', 50, 70, '2024-04-09'),
+(2, 'Cuffie', 'Cuffie on-ear', 50, 100, '2024-04-09'),
 (3, 'Monitor', 'Monitor per computer', 50, 300, '2024-04-09'),
 (4, 'Mouse', 'Mouse da gaming', 50, 50, '2024-04-09'),
-(5, 'Tastiera', 'Tastiera da gaming', 50, 60, '2024-04-09');
+(5, 'Tastiera', 'Tastiera da gaming', 50, 60, '2024-04-09'),
+(7, 'Tappetino', 'Tappetino per mouse', 50, 30, '2024-04-28');
 
 -- --------------------------------------------------------
 
@@ -287,7 +281,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT per la tabella `aggiunta`
 --
 ALTER TABLE `aggiunta`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT per la tabella `carrello`
@@ -317,7 +311,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT per la tabella `foto`
 --
 ALTER TABLE `foto`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT per la tabella `ordine`
@@ -335,7 +329,7 @@ ALTER TABLE `pagamento`
 -- AUTO_INCREMENT per la tabella `prodotto`
 --
 ALTER TABLE `prodotto`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT per la tabella `user`
