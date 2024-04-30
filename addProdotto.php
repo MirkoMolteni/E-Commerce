@@ -7,15 +7,16 @@ $idProdotto = $_POST['idProdotto'];
 $quantita = $_POST['quantita'];
 $sql = "SELECT ID FROM " . $prefix . "carrello WHERE idUtente = $idUser";
 $result = $conn->query($sql);
+
 if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $idCarrello = $row['ID'];
+} else {
     $sql = "INSERT INTO carrello (idUtente) VALUES ($idUser)";
     $conn->query($sql);
     $idCarrello = $conn->insert_id;
-} else {
-    $row = $result->fetch_assoc();
-    $idCarrello = $row['ID'];
-
 }
+
 $sql = "SELECT * FROM " . $prefix . "prodotto WHERE ID = $idProdotto";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
