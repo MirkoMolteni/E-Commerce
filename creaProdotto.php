@@ -8,6 +8,10 @@ if(isset($_GET['nomeProdotto']) && isset($_GET['descrizioneProdotto']) && isset(
     $prezzoProdotto = $_GET['prezzoProdotto'];
     $quantitaProdotto = $_GET['quantitaProdotto'];
     $pathProdotto = $_GET['immagineProdotto'];
+    // Copy the image to the img folder
+    $targetDir = "img/";
+    $targetFile = $targetDir . basename($_FILES["immagineProdotto"]["name"]);
+    move_uploaded_file($_FILES["immagineProdotto"]["tmp_name"], $targetFile);
 
     // $query = "INSERT INTO ".$prefix."prodotto ('ID', 'Nome', 'Descrizione', 'Quantita', 'Prezzo', 'DataAggiunta') VALUES (NULL, ?, ?, ?, ?, current_timestamp())";
     $query = "INSERT INTO ".$prefix."prodotto (`ID`, `Nome`, `Descrizione`, `Quantita`, `Prezzo`, `DataAggiunta`) VALUES (NULL, ?, ?, ?, ?, current_timestamp())";
