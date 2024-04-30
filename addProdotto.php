@@ -12,7 +12,7 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $idCarrello = $row['ID'];
 } else {
-    $sql = "INSERT INTO carrello (idUtente) VALUES ($idUser)";
+    $sql = "INSERT INTO " . $prefix . "carrello (idUtente) VALUES ($idUser)";
     $conn->query($sql);
     $idCarrello = $conn->insert_id;
 }
