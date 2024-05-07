@@ -79,7 +79,7 @@ if(isset($_GET["acquistato"]))
                     <div class="card-body">
                         <h5 class="card-title">Totale</h5>
                         <?php
-                        $sql = "SELECT SUM(prodotto.Prezzo * aggiunta.Quantita) AS Totale FROM ".$prefix."prodotto INNER JOIN aggiunta ON prodotto.ID = aggiunta.idProdotto WHERE idCarrello = $idCarrello";
+                        $sql = "SELECT SUM(".$prefix."prodotto.Prezzo * ".$prefix."aggiunta.Quantita) AS Totale FROM ".$prefix."prodotto INNER JOIN ".$prefix."aggiunta ON ".$prefix."prodotto.ID = ".$prefix."aggiunta.idProdotto WHERE idCarrello = $idCarrello";
                         $resultTotale = $conn->query($sql);
                         if ($resultTotale->num_rows > 0) {
                             $rowTotale = $resultTotale->fetch_assoc();
