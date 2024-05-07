@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 30, 2024 alle 09:30
+-- Creato il: Mag 07, 2024 alle 09:17
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -34,6 +34,16 @@ CREATE TABLE `aggiunta` (
   `Quantita` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `aggiunta`
+--
+
+INSERT INTO `aggiunta` (`ID`, `idCarrello`, `idProdotto`, `Quantita`) VALUES
+(18, 3, 2, 1),
+(19, 3, 5, 1),
+(20, 3, 7, 1),
+(21, 3, 3, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -50,7 +60,7 @@ CREATE TABLE `carrello` (
 --
 
 INSERT INTO `carrello` (`ID`, `idUtente`) VALUES
-(1, 1);
+(3, 1);
 
 -- --------------------------------------------------------
 
@@ -147,6 +157,14 @@ CREATE TABLE `pagamento` (
   `idUtente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `pagamento`
+--
+
+INSERT INTO `pagamento` (`ID`, `NumeroCarta`, `Scadenza`, `CVV`, `idUtente`) VALUES
+(1, '123123123', '2024-05-31', 123, 1),
+(2, '456456456', '2024-05-31', 456, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -167,12 +185,12 @@ CREATE TABLE `prodotto` (
 --
 
 INSERT INTO `prodotto` (`ID`, `Nome`, `Descrizione`, `Quantita`, `Prezzo`, `DataAggiunta`) VALUES
-(1, 'Casse', 'Casse per computer', 50, 70, '2024-04-09'),
-(2, 'Cuffie', 'Cuffie on-ear', 50, 100, '2024-04-09'),
-(3, 'Monitor', 'Monitor per computer', 50, 300, '2024-04-09'),
+(1, 'Casse', 'Casse per computer', 49, 70, '2024-04-09'),
+(2, 'Cuffie', 'Cuffie on-ear', 49, 100, '2024-04-09'),
+(3, 'Monitor', 'Monitor per computer', 49, 300, '2024-04-09'),
 (4, 'Mouse', 'Mouse da gaming', 50, 50, '2024-04-09'),
-(5, 'Tastiera', 'Tastiera da gaming', 50, 60, '2024-04-09'),
-(7, 'Tappetino', 'Tappetino per mouse', 50, 30, '2024-04-28');
+(5, 'Tastiera', 'Tastiera da gaming', 49, 60, '2024-04-09'),
+(7, 'Tappetino', 'Tappetino per mouse', 49, 30, '2024-04-28');
 
 -- --------------------------------------------------------
 
@@ -281,13 +299,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT per la tabella `aggiunta`
 --
 ALTER TABLE `aggiunta`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT per la tabella `carrello`
 --
 ALTER TABLE `carrello`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la tabella `categoria`
@@ -323,7 +341,7 @@ ALTER TABLE `ordine`
 -- AUTO_INCREMENT per la tabella `pagamento`
 --
 ALTER TABLE `pagamento`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `prodotto`

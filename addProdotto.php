@@ -5,7 +5,7 @@ include 'config.php';
 $idUser = $_SESSION['id'];
 $idProdotto = $_POST['idProdotto'];
 $quantita = $_POST['quantita'];
-$sql = "SELECT ID FROM " . $prefix . "carrello WHERE idUtente = $idUser";
+$sql = "SELECT ID FROM " . $prefix . "carrello WHERE idUtente = $idUser AND Acquistato = 0";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

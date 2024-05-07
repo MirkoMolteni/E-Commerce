@@ -1,6 +1,14 @@
 <?php
 session_start();
 include 'config.php';
+if (!isset($_SESSION['id'])) {
+    header("Location: login.php");
+    exit;
+}
+if(isset($_GET["acquistato"]))
+{
+    echo '<script>alert("Acquisto effettuato con successo")</script>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +28,7 @@ include 'config.php';
     $navBar->getRender();
     include 'connection.php';
     $idUser = $_SESSION['id'];
-    $sql = "SELECT ID FROM ".$prefix."carrello WHERE idUtente = $idUser";
+    $sql = "SELECT ID FROM ".$prefix."carrello WHERE idUtente = $idUser AND Acquistato = 0";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         ?>
@@ -29,6 +37,7 @@ include 'config.php';
                 <?php
                 $row = $result->fetch_assoc();
                 $idCarrello = $row['ID'];
+                $_SESSION['idCarrello'] = $idCarrello;
                 $sql = "SELECT * FROM ".$prefix."aggiunta WHERE idCarrello = $idCarrello";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
@@ -84,7 +93,7 @@ include 'config.php';
         </div>
         <?php
     } else {
-        echo 'Carrello non trovato';
+        echo "<div class='container' style='text-align: center; margin-top: 200px;'><h1>Carrello vuoto</h1></div>";
     }
     ?>
     <!-- Include Bootstrap JS -->
