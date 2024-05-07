@@ -5,7 +5,7 @@ if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit;
 }
-if(isset($_GET["acquistato"]))
+if(isset($_GET["acquisto"]))
 {
     echo '<script>alert("Acquisto effettuato con successo")</script>';
 }

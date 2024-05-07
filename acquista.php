@@ -2,6 +2,7 @@
 session_start();
 include "connection.php";
 include "navBar.php";
+include "config.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +33,7 @@ include "navBar.php";
                     <h2>Dati di acquisto</h2>
                     <h3>Scegli una carta</h3>
                     <?php
-                    $query = "SELECT * FROM pagamento WHERE idUtente = " . $_SESSION['id'];
+                    $query = "SELECT * FROM ".$prefix."pagamento WHERE idUtente = " . $_SESSION['id'];
                     $result = $conn->query($query);
                     echo "<div class='form-group'>";
                     echo "<select name='carta' class='form-control'>";
