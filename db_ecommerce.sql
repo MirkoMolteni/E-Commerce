@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 07, 2024 alle 09:17
+-- Creato il: Mag 07, 2024 alle 09:44
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -42,7 +42,8 @@ INSERT INTO `aggiunta` (`ID`, `idCarrello`, `idProdotto`, `Quantita`) VALUES
 (18, 3, 2, 1),
 (19, 3, 5, 1),
 (20, 3, 7, 1),
-(21, 3, 3, 1);
+(21, 3, 3, 1),
+(22, 4, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -52,15 +53,17 @@ INSERT INTO `aggiunta` (`ID`, `idCarrello`, `idProdotto`, `Quantita`) VALUES
 
 CREATE TABLE `carrello` (
   `ID` int(11) NOT NULL,
-  `idUtente` int(11) NOT NULL
+  `idUtente` int(11) NOT NULL,
+  `Acquistato` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `carrello`
 --
 
-INSERT INTO `carrello` (`ID`, `idUtente`) VALUES
-(3, 1);
+INSERT INTO `carrello` (`ID`, `idUtente`, `Acquistato`) VALUES
+(3, 1, 1),
+(4, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -138,10 +141,17 @@ CREATE TABLE `ordine` (
   `ID` int(11) NOT NULL,
   `Stato` varchar(32) NOT NULL,
   `Indirizzo` varchar(32) NOT NULL,
-  `DataAggiunta` date NOT NULL,
+  `DataAggiunta` date NOT NULL DEFAULT current_timestamp(),
   `idCarrello` int(11) NOT NULL,
   `idPagamento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `ordine`
+--
+
+INSERT INTO `ordine` (`ID`, `Stato`, `Indirizzo`, `DataAggiunta`, `idCarrello`, `idPagamento`) VALUES
+(1, 'Acquistato', 'Via daverio', '2024-05-07', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -185,7 +195,7 @@ CREATE TABLE `prodotto` (
 --
 
 INSERT INTO `prodotto` (`ID`, `Nome`, `Descrizione`, `Quantita`, `Prezzo`, `DataAggiunta`) VALUES
-(1, 'Casse', 'Casse per computer', 49, 70, '2024-04-09'),
+(1, 'Casse', 'Casse per computer', 48, 70, '2024-04-09'),
 (2, 'Cuffie', 'Cuffie on-ear', 49, 100, '2024-04-09'),
 (3, 'Monitor', 'Monitor per computer', 49, 300, '2024-04-09'),
 (4, 'Mouse', 'Mouse da gaming', 50, 50, '2024-04-09'),
@@ -299,13 +309,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT per la tabella `aggiunta`
 --
 ALTER TABLE `aggiunta`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT per la tabella `carrello`
 --
 ALTER TABLE `carrello`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT per la tabella `categoria`
@@ -335,7 +345,7 @@ ALTER TABLE `foto`
 -- AUTO_INCREMENT per la tabella `ordine`
 --
 ALTER TABLE `ordine`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `pagamento`
